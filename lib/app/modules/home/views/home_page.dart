@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import 'package:modular_notes/app/modules/home/home_store.dart';
+import 'package:modular_notes/app/modules/home/controllers/home_store.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -23,11 +22,11 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
         title: Text('Counter'),
       ),
       body: Observer(
-        builder: (context) => Text('${store.counter}'),
+        builder: (context) => Text(''),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          store.increment();
+          //store.increment();
         },
         child: Icon(Icons.add),
       ),
