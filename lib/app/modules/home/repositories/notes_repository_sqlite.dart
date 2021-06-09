@@ -14,6 +14,7 @@ class NotesRepositorySqlite extends INotesRepository {
       db!.insert('Notes', note.toMap());
       return true;
     } catch (e) {
+      print(e);
       return false;
     }
   }
@@ -23,5 +24,17 @@ class NotesRepositorySqlite extends INotesRepository {
     final db = await helper.db;
     final res = await db!.rawQuery('SELECT * FROM Notes');
     return res.map((e) => Note.fromMap(e)).toList();
+  }
+
+  @override
+  Future<bool> removeNote(Note note) async {
+    try {
+      final db = await helper.db;
+      db!.delete('Notes', where: 'id=?', whereArgs: [note.id]);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 }

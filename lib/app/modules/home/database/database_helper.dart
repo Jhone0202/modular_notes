@@ -9,7 +9,7 @@ class DatabaseHelper {
   factory DatabaseHelper() => _instance;
 
   static Database? _db;
-  final int version = 1;
+  final int version = 2;
 
   Future<Database?> get db async {
     if (_db != null) {
@@ -36,7 +36,7 @@ class DatabaseHelper {
     await database.execute(
       '''
         CREATE TABLE Notes(
-          id INTEGER PRIMARY KEY,
+          id INTEGER PRIMARY KEY NOT NULL AUTO INCREMENT,
           title TEXT,
           content TEXT,
           createdAt TEXT

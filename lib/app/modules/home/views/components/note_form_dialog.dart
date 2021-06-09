@@ -21,16 +21,20 @@ class _NoteFormDialogState extends ModularState<NoteFormDialog, UtilsStore> {
   String title = '';
   String content = '';
 
-  _addNote(HomeStore controller) {
-    try {
-      if (store.validateAndSave(formKey)) {
-        controller.add(
-          Note(title: title, content: content),
-        );
-        Modular.to.pop();
-      }
-    } catch (e) {
-      print(e);
+  Future _addNote(HomeStore controller) async {
+    if (store.validateAndSave(formKey)) {
+      final added = await controller.add(Note(title: title, content: content));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: added ? Colors.green : Colors.red,
+          content: Text(
+            added
+                ? 'Nota adicionada com sucesso!'
+                : 'Ocorreu um erro ao adicionar a nota',
+          ),
+        ),
+      );
+      Modular.to.pop();
     }
   }
 

@@ -25,7 +25,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
             itemCount: notes.length,
             itemBuilder: (context, index) {
               final note = notes[index];
-              return NoteCard(note: note);
+              return NoteCard(note: note, controller: controller);
             },
           );
         },

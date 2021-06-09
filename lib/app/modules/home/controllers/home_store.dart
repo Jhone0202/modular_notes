@@ -24,8 +24,18 @@ abstract class HomeStoreBase with Store {
   }
 
   @action
-  Future add(Note note) async {
-    await repository.addNote(note);
+  Future<bool> add(Note note) async {
+    final added = await repository.addNote(note);
+    if (!added) return false;
     notes.add(note);
+    return true;
+  }
+
+  @action
+  Future<bool> remove(Note note) async {
+    final removed = await repository.removeNote(note);
+    if (!removed) return false;
+    notes.remove(note);
+    return true;
   }
 }
