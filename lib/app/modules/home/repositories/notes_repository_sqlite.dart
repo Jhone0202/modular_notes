@@ -1,7 +1,6 @@
 import 'package:modular_notes/app/modules/home/database/database_helper.dart';
 import 'package:modular_notes/app/modules/home/interfaces/notes_repository_interface.dart';
 import 'package:modular_notes/app/modules/home/models/note_model.dart';
-import 'package:sqflite/sqflite.dart';
 
 class NotesRepositorySqlite extends INotesRepository {
   final DatabaseHelper helper;

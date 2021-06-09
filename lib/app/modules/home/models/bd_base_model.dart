@@ -1,6 +1,6 @@
 class BdBaseModel {
   final int? id;
-  final String createdAt;
+  final DateTime createdAt;
 
   BdBaseModel(this.id, this.createdAt);
 }

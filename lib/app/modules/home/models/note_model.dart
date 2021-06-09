@@ -10,15 +10,15 @@ class Note extends BdBaseModel {
     int? id,
     required this.title,
     required this.content,
-    required String createdAt,
-  }) : super(id, createdAt);
+    DateTime? createdAt,
+  }) : super(id, createdAt = DateTime.now().toUtc());
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'title': title,
       'content': content,
-      'createdAt': createdAt,
+      'createdAt': createdAt.toString(),
     };
   }
 
@@ -27,7 +27,7 @@ class Note extends BdBaseModel {
       id: map['id'],
       title: map['title'],
       content: map['content'],
-      createdAt: map['createdAt'],
+      createdAt: DateTime.tryParse(map['createdAt']),
     );
   }
 

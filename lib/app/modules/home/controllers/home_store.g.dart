@@ -9,10 +9,32 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on HomeStoreBase, Store {
+  final _$notesAtom = Atom(name: 'HomeStoreBase.notes');
+
+  @override
+  ObservableList<Note> get notes {
+    _$notesAtom.reportRead();
+    return super.notes;
+  }
+
+  @override
+  set notes(ObservableList<Note> value) {
+    _$notesAtom.reportWrite(value, super.notes, () {
+      super.notes = value;
+    });
+  }
+
+  final _$getListAsyncAction = AsyncAction('HomeStoreBase.getList');
+
+  @override
+  Future getList() {
+    return _$getListAsyncAction.run(() => super.getList());
+  }
+
   @override
   String toString() {
     return '''
-
+notes: ${notes}
     ''';
   }
 }

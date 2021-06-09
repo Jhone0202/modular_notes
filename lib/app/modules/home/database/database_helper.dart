@@ -35,12 +35,12 @@ class DatabaseHelper {
   Future _onCreate(Database database, int version) async {
     await database.execute(
       '''
-        "CREATE TABLE Notes(
+        CREATE TABLE Notes(
           id INTEGER PRIMARY KEY,
           title TEXT,
           content TEXT,
           createdAt TEXT
-        )"    
+        )    
       ''',
     );
   }

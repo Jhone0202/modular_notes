@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_notes/app/modules/home/controllers/home_store.dart';
+import 'package:modular_notes/app/modules/home/models/note_model.dart';
+import 'components/note_form_dialog.dart';
+import 'components/note_card.dart';
 
 class HomePage extends StatefulWidget {
-  final String title;
-  const HomePage({
-    Key? key,
-    this.title = '',
-  }) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -19,15 +16,25 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Counter'),
+        title: Text('Notes'),
       ),
       body: Observer(
-        builder: (context) => Text(''),
+        builder: (context) {
+          final List<Note> notes = controller.notes;
+          return ListView.builder(
+            itemCount: notes.length,
+            itemBuilder: (context, index) {
+              final note = notes[index];
+              return NoteCard(note: note);
+            },
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //store.increment();
-        },
+        onPressed: () => showDialog(
+          context: context,
+          builder: (context) => NoteFormDialog(controller: controller),
+        ),
         child: Icon(Icons.add),
       ),
     );
