@@ -36,7 +36,7 @@ class DatabaseHelper {
     await database.execute(
       '''
         CREATE TABLE Notes(
-          id INTEGER PRIMARY KEY NOT NULL AUTO INCREMENT,
+          id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
           title TEXT,
           content TEXT,
           createdAt TEXT

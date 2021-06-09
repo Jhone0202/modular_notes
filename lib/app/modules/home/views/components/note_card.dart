@@ -42,7 +42,9 @@ class _NoteCardState extends State<NoteCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(widget.note.content),
-          Text(DateFormat('dd/MM/yyyy - hh:mm').format(widget.note.createdAt)),
+          Text(
+            DateFormat('dd/MM/yyyy - hh:mm:ss').format(widget.note.createdAt),
+          ),
         ],
       ),
       trailing: IconButton(

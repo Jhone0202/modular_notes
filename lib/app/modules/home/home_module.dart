@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_notes/app/modules/home/database/database_helper.dart';
 import 'package:modular_notes/app/modules/home/interfaces/notes_repository_interface.dart';
+import 'package:modular_notes/app/modules/home/repositories/notes_repository_fb.dart';
 import 'package:modular_notes/app/modules/home/repositories/notes_repository_sqlite.dart';
 import 'package:modular_notes/app/modules/home/utils/utils_store.dart';
 
@@ -11,9 +13,11 @@ class HomeModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.singleton((i) => HomeStore(i.get())),
-    Bind<INotesRepository>((i) => NotesRepositorySqlite(i.get())),
-    Bind<DatabaseHelper>((i) => DatabaseHelper()),
+    //Bind<INotesRepository>((i) => NotesRepositorySqlite(i.get())),
+    //Bind<DatabaseHelper>((i) => DatabaseHelper()),
     Bind<UtilsStore>((i) => UtilsStore()),
+    Bind<INotesRepository>(
+        (i) => NotesRepositoryFb(FirebaseFirestore.instance)),
   ];
 
   @override

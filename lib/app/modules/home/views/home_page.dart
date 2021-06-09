@@ -17,6 +17,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notes'),
+        brightness: Brightness.dark,
       ),
       body: Observer(
         builder: (context) {

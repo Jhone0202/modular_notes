@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modular_notes/app/modules/home/models/bd_base_model.dart';
 
 class Note extends BdBaseModel {
@@ -7,7 +8,7 @@ class Note extends BdBaseModel {
   String content;
 
   Note({
-    int? id,
+    String? id,
     required this.title,
     required this.content,
     DateTime? createdAt,
@@ -15,7 +16,7 @@ class Note extends BdBaseModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      //'id': id,
       'title': title,
       'content': content,
       'createdAt': createdAt.toString(),
@@ -25,6 +26,16 @@ class Note extends BdBaseModel {
   factory Note.fromMap(Map<String, dynamic> map) {
     return Note(
       id: map['id'],
+      title: map['title'],
+      content: map['content'],
+      createdAt: DateTime.tryParse(map['createdAt']),
+    );
+  }
+
+  factory Note.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snap) {
+    final map = snap.data();
+    return Note(
+      id: snap.id,
       title: map['title'],
       content: map['content'],
       createdAt: DateTime.tryParse(map['createdAt']),
